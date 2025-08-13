@@ -17,7 +17,7 @@ Su objetivo es **promover el deporte comunitario** y facilitar la **gestión de 
 ---
 
 ## 📂 Estructura del proyecto
-
+```
 static/ # Archivos estáticos
 ├── img/ # Imágenes utilizadas en la plataforma
 │ ├── hayuelos.png
@@ -41,8 +41,7 @@ templates/ # Plantillas HTML
 app.py # Backend principal con Flask
 database.db # Base de datos SQLite
 schema.sql # Script de creación de la base de datos
-
----
+```
 
 ## ✅ Requisitos previos
 
@@ -64,23 +63,32 @@ schema.sql # Script de creación de la base de datos
 ## 🚀 Ejecución del proyecto
 
 1. **Clonar el repositorio:**
+   ```bash
    git clone https://github.com/juanes-15/TU-CANCHA.git
    cd TU-CANCHA
-2. **Instalar dependencias:**
+   ```
+3. **Instalar dependencias:**
+   ```
    pip install flask
-3. **Ejecutar la aplicación:**
+   ```
+4. **Ejecutar la aplicación:**
+   ```
    python app.py
-4. **Abrir en el navegador:**
+   ```
+5. **Abrir en el navegador:**
+   ```
    http://127.0.0.1:5000/
+   ```
 
 ---
 
-📌 Flujo de la aplicación
-1.El usuario se registra en 1_registro.html o inicia sesión en 2_login.html.
+## 📌 Flujo de la aplicación
 
-2.Tras autenticarse, es redirigido a 3_bienvenida.html.
+1. **El usuario se registra en 1_registro.html o inicia sesión en 2_login.html.**
 
-3.Desde allí puede:
+2. **Tras autenticarse, es redirigido a 3_bienvenida.html.**
+
+3. **Desde allí puede:**
 
 -📅 Hacer reservas en 4_reservar.html.
 
@@ -90,7 +98,8 @@ schema.sql # Script de creación de la base de datos
 
 -⚙️ La lógica del frontend está en static/js/.
 
-📄 Notas adicionales
+## 📄 Notas adicionales
+
 -📷 static/img/ contiene imágenes de las canchas disponibles.
 
 -🖥️ static/js/ implementa la lógica del cliente (validaciones, interacciones, etc.).
@@ -99,12 +108,12 @@ schema.sql # Script de creación de la base de datos
 
 -🖧 app.py actúa como servidor y maneja rutas y base de datos.
 
-📚 Documentación
+## 📚 Documentación
 -📄 Documentación Parte 1
 
 -📄 Documentación Parte 2
 
-Incluyen:
+**Incluyen:**
 
 -📌 Planificación del proyecto.
 
@@ -114,7 +123,7 @@ Incluyen:
 
 -🚀 Visión futura y mejoras.
 
-🤝 Contribuciones
+## 🤝 Contribuciones
 ¡Las contribuciones son bienvenidas!
 Puedes:
 
@@ -124,6 +133,6 @@ Puedes:
 
 -🔧 Mejorar el código o la documentación.
 
-📜 Licencia
+##📜 Licencia
 Este proyecto está bajo la licencia MIT.
 Consulta el archivo LICENSE para más detalles.
