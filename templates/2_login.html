@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Iniciar Sesión - Tu Cancha</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Public+Sans:wght@400;500;700;900" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body class="bg-[#121714] text-white min-h-screen" style="font-family: 'Public Sans', 'Noto Sans', sans-serif;">
+
+  <div class="flex items-center justify-center min-h-screen px-6">
+    <!-- Formulario de inicio de sesión -->
+    <div class="w-full max-w-md space-y-6">
+      <h1 class="text-3xl font-bold mb-4">Iniciar Sesión</h1>
+      <form id="loginForm" class="space-y-4 bg-[#1d221e] p-6 rounded-xl shadow">
+        <div>
+          <label for="email" class="block text-sm font-medium mb-1">Correo electrónico</label>
+          <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded bg-[#2e352c] text-white border border-[#3a4539]" />
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium mb-1">Contraseña</label>
+          <input type="password" id="password" name="password" required class="w-full px-4 py-2 rounded bg-[#2e352c] text-white border border-[#3a4539]" />
+        </div>
+        <button type="submit" class="w-full bg-[#94e0b1] text-[#121714] font-bold px-4 py-2 rounded-xl hover:bg-[#7bd1a2] transition">Entrar</button>
+        <p id="errorText" class="text-red-500 text-sm mt-2"></p>
+      </form>
+      <p class="text-sm text-[#a2b4a9] text-center">
+        ¿No tienes cuenta? <a href="/register" class="underline text-[#94e0b1]">Regístrate aquí</a>
+      </p>
+    </div>
+
+    <!-- Logo a la derecha -->
+    <div class="hidden md:flex items-center justify-center ml-12">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Tu Cancha" class="h-48 w-auto" />
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      const response = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        window.location.href = "/bienvenida";
+      } else {
+        document.getElementById("errorText").textContent = result.message || "Error al iniciar sesión";
+      }
+    });
+  </script>
+
+</body>
+</html>

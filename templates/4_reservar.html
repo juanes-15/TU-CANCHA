@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Stitch Design - Realizar Reserva</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Public+Sans:wght@400;500;700;900" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body class="bg-[#121714] text-white min-h-screen" style="font-family: 'Public Sans', 'Noto Sans', sans-serif;">
+  <header class="flex items-center justify-between border-b border-[#2b362f] px-10 py-3">
+    <div class="flex items-center gap-4">
+      <h2 class="text-lg font-bold">Tu Cancha</h2>
+    </div>
+    <a href="/bienvenida" class="text-white text-sm font-medium px-4">Volver a Bienvenida</a>
+    {% if session.get('user_id') %}
+      <a href="/logout" class="rounded-full h-10 px-4 bg-[#2e352c] text-white text-sm font-bold flex items-center">Cerrar Sesión</a>
+    {% endif %}
+  </header>
+
+  <main class="flex justify-center py-10">
+    <div class="w-full max-w-xl px-4">
+      <h2 class="text-[28px] font-bold text-center mb-6">Realizar Reserva en Tu Cancha</h2>
+
+      <!-- NOMBRE -->
+      <div class="mb-4">
+        <label class="block mb-2 font-medium">Nombre</label>
+        <input id="nombre" type="text" placeholder="Ingresa tu nombre" class="w-full rounded-xl border border-[#404f46] bg-[#1e2520] h-14 px-4 placeholder:text-[#a2b4a9] focus:outline-none text-white" />
+      </div>
+
+      <!-- EMAIL -->
+      <div class="mb-4">
+        <label class="block mb-2 font-medium">Correo electrónico</label>
+        <input id="emailReserva" type="email" placeholder="Ingresa tu correo electrónico" value="{{ session['user_email'] if session.get('user_email') else '' }}" class="w-full rounded-xl border border-[#404f46] bg-[#1e2520] h-14 px-4 placeholder:text-[#a2b4a9] focus:outline-none text-white" />
+      </div>
+
+      <!-- TELÉFONO -->
+      <div class="mb-4">
+        <label class="block mb-2 font-medium">Teléfono</label>
+        <input id="telefono" type="tel" placeholder="Ingresa tu número de teléfono" class="w-full rounded-xl border border-[#404f46] bg-[#1e2520] h-14 px-4 placeholder:text-[#a2b4a9] focus:outline-none text-white" />
+      </div>
+
+      <!-- UBICACIÓN -->
+      <div class="mb-4">
+        <label class="block mb-2 font-medium">Ubicación</label>
+        <select id="ubicacion" class="w-full rounded-xl border border-[#404f46] bg-[#1e2520] h-14 px-4 text-white">
+          <option value="">Selecciona una ubicación</option>
+          <option value="Salitre Cl 63 #60-50">Salitre Cl 63 #60-50</option>
+          <option value="Modelia Cl. 24c #81-99 a 81-61">Modelia Cl. 24c #81-99 a 81-61</option>
+          <option value="Hayuelos Cl.19b#81b-45 ">Hayuelos Cl.19b#81b-45</option>
+          <option value="Villemar Cl. 18 #96b-47">Villemar Cl. 18 #96b-47</option>
+          <option value="Parque El Ruby Cra. 96k #23g-03">Parque El Ruby Cra. 96k #23g-03</option>
+          
+        </select>
+      </div>
+
+      <!-- HORA -->
+      <div class="mb-4">
+        <label class="block mb-2 font-medium">Hora</label>
+        <input id="hora" type="time" class="w-full rounded-xl border border-[#404f46] bg-[#1e2520] h-14 px-4 text-white" />
+      </div>
+
+      <!-- FECHA -->
+      <div class="mb-4">
+        <label class="block mb-2 font-medium">Fecha</label>
+        <input id="fecha" type="date" class="w-full rounded-xl border border-[#404f46] bg-[#1e2520] h-14 px-4 text-white" />
+      </div>
+
+      <!-- BOTÓN ENVIAR -->
+      <div class="mb-4">
+        <button id="btnEnviarReserva" class="w-full rounded-xl bg-[#94e0b1] text-[#121714] font-bold h-12">Enviar</button>
+      </div>
+
+      <!-- MENSAJE -->
+      <div id="messageReserva" class="text-center text-red-500 py-2"></div>
+
+      <!-- BOTÓN VOLVER -->
+      <div class="mt-2 text-center">
+        <a href="/bienvenida" class="inline-block rounded-xl bg-[#2e352c] text-white font-bold px-6 py-2">Volver</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/reservar.js') }}"></script>
+</body>
+</html>

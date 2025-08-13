@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bienvenida - Tu Cancha</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Public+Sans:wght@400;500;700;900" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    .slider-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+    .slider-track {
+      display: flex;
+      width: max-content;
+      animation: scroll-left 30s linear infinite;
+    }
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .slider-track > div {
+      min-width: 300px;
+      margin-right: 1rem;
+    }
+  </style>
+</head>
+<body class="bg-[#121714] text-white min-h-screen" style="font-family: 'Public Sans', 'Noto Sans', sans-serif;">
+
+  <!-- Logo -->
+  <div class="absolute top-4 left-4 z-50">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Tu Cancha" class="h-12 w-auto" />
+  </div>
+
+  <!-- Encabezado -->
+  <header class="flex items-center justify-between border-b border-[#2b362f] px-10 py-3 mt-20">
+    <h1 class="text-2xl font-bold">Bienvenido, {{ session['user_email'] }}</h1>
+    <a href="/logout" class="rounded-full h-10 px-4 bg-[#2e352c] text-white text-sm font-bold flex items-center">Cerrar Sesión</a>
+  </header>
+
+  <!-- Imagen de portada -->
+  <div class="w-full">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Tu Cancha" class="w-full h-64 object-contain bg-white p-4" />
+  </div>
+
+  <main class="px-10 py-6 space-y-8">
+
+    <!-- Galería tipo slider infinito -->
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Canchas disponibles</h2>
+      <div class="slider-wrapper">
+        <div class="slider-track">
+          {% for i in range(2) %}
+          <div class="bg-[#1d221e] rounded-xl overflow-hidden shadow">
+            <img src="{{ url_for('static', filename='img/salitre.png') }}" class="w-full h-40 object-cover" alt="Salitre" />
+            <div class="p-3"><h3 class="font-semibold text-lg">Salitre</h3><p class="text-sm text-[#a2b4a9]">Cl. 63 #60-50</p></div>
+          </div>
+          <div class="bg-[#1d221e] rounded-xl overflow-hidden shadow">
+            <img src="{{ url_for('static', filename='img/modelia.png') }}" class="w-full h-40 object-cover" alt="Modelia" />
+            <div class="p-3"><h3 class="font-semibold text-lg">Modelia</h3><p class="text-sm text-[#a2b4a9]">Cl. 24c #81-99 a 81-61</p></div>
+          </div>
+          <div class="bg-[#1d221e] rounded-xl overflow-hidden shadow">
+            <img src="{{ url_for('static', filename='img/hayuelos.png') }}" class="w-full h-40 object-cover" alt="Hayuelos" />
+            <div class="p-3"><h3 class="font-semibold text-lg">Hayuelos</h3><p class="text-sm text-[#a2b4a9]">Cl. 19b #81b-45</p></div>
+          </div>
+          <div class="bg-[#1d221e] rounded-xl overflow-hidden shadow">
+            <img src="{{ url_for('static', filename='img/villemar.png') }}" class="w-full h-40 object-cover" alt="Villemar" />
+            <div class="p-3"><h3 class="font-semibold text-lg">Villemar</h3><p class="text-sm text-[#a2b4a9]">Cl. 18 #96b-47</p></div>
+          </div>
+          <div class="bg-[#1d221e] rounded-xl overflow-hidden shadow">
+            <img src="{{ url_for('static', filename='img/parque el ruby.png') }}" class="w-full h-40 object-cover" alt="Parque El Ruby" />
+            <div class="p-3"><h3 class="font-semibold text-lg">Parque El Ruby</h3><p class="text-sm text-[#a2b4a9]">Cra. 96k #23g-03</p></div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- Reservas del usuario -->
+    <div class="flex justify-between items-center mt-10 mb-6">
+      <h2 class="text-xl font-semibold">Tus Reservas</h2>
+      <a href="/reservar_page" class="bg-[#94e0b1] text-[#121714] font-bold px-5 py-2 rounded-xl">Nueva Reserva</a>
+    </div>
+
+    {% if reservas %}
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead class="bg-[#1e2520] text-[#a2b4a9]">
+            <tr>
+              <th class="p-3 border-b border-[#2e352c]">Nombre</th>
+              <th class="p-3 border-b border-[#2e352c]">Correo</th>
+              <th class="p-3 border-b border-[#2e352c]">Teléfono</th>
+              <th class="p-3 border-b border-[#2e352c]">Ubicación</th>
+              <th class="p-3 border-b border-[#2e352c]">Hora</th>
+              <th class="p-3 border-b border-[#2e352c]">Fecha</th>
+              <th class="p-3 border-b border-[#2e352c]">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in reservas %}
+              <tr class="border-b border-[#2e352c] hover:bg-[#1b1f1c]">
+                <td class="p-3">{{ r['name'] }}</td>
+                <td class="p-3">{{ r['email'] }}</td>
+                <td class="p-3">{{ r['phone'] or 'N/A' }}</td>
+                <td class="p-3">{{ r['location'] }}</td>
+                <td class="p-3">{{ r['reservation_time'] }}</td>
+                <td class="p-3">{{ r['reservation_date'] }}</td>
+                <td class="p-3 space-y-1">
+                  <a href="/editar_reserva/{{ r['id'] }}" class="bg-yellow-400 text-[#121714] px-3 py-1 rounded inline-block">Editar</a>
+                  <form action="/eliminar_reserva/{{ r['id'] }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar esta reserva?')" style="display:inline;">
+                    <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Eliminar</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="text-[#a2b4a9]">No tienes reservas registradas aún.</p>
+    {% endif %}
+  </main>
+</body>
+</html>

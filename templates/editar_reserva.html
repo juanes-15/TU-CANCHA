@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Reserva - Tu Cancha</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Public+Sans:wght@400;500;700;900" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body class="bg-[#121714] text-white min-h-screen" style="font-family: 'Public Sans', 'Noto Sans', sans-serif;">
+
+  <header class="flex items-center justify-between border-b border-[#2b362f] px-10 py-4">
+    <h1 class="text-2xl font-bold">Editar Reserva</h1>
+    <a href="/bienvenida" class="bg-[#2e352c] text-white px-4 py-2 rounded-full font-bold">Volver</a>
+  </header>
+
+  <main class="max-w-2xl mx-auto mt-8 px-6">
+    <form action="/actualizar_reserva/{{ reserva.id }}" method="POST" class="space-y-6 bg-[#1e2520] p-6 rounded-xl shadow">
+
+      <div>
+        <label class="block text-sm font-medium text-[#a2b4a9] mb-1">Nombre</label>
+        <input type="text" name="nombre" required class="w-full bg-[#2b362f] text-white rounded-lg p-3" value="{{ reserva.name }}">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-[#a2b4a9] mb-1">Correo</label>
+        <input type="email" name="email" required class="w-full bg-[#2b362f] text-white rounded-lg p-3" value="{{ reserva.email }}">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-[#a2b4a9] mb-1">Teléfono</label>
+        <input type="tel" name="telefono" class="w-full bg-[#2b362f] text-white rounded-lg p-3" value="{{ reserva.phone }}">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-[#a2b4a9] mb-1">Ubicación</label>
+        <select name="ubicacion" required class="w-full bg-[#2b362f] text-white rounded-lg p-3">
+          <option value="Cancha Central" {% if reserva.location == 'Cancha Central' %}selected{% endif %}>Cancha Central</option>
+          <option value="Cancha Norte" {% if reserva.location == 'Cancha Norte' %}selected{% endif %}>Cancha Norte</option>
+          <option value="Cancha Sur" {% if reserva.location == 'Cancha Sur' %}selected{% endif %}>Cancha Sur</option>
+        </select>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-[#a2b4a9] mb-1">Hora</label>
+          <input type="time" name="hora" required class="w-full bg-[#2b362f] text-white rounded-lg p-3" value="{{ reserva.reservation_time }}">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-[#a2b4a9] mb-1">Fecha</label>
+          <input type="date" name="fecha" required class="w-full bg-[#2b362f] text-white rounded-lg p-3" value="{{ reserva.reservation_date }}">
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+        <button type="submit" class="bg-[#94e0b1] text-[#121714] px-6 py-2 rounded-xl font-bold hover:bg-[#a8f0c0] transition">Guardar Cambios</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
